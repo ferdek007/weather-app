@@ -57,13 +57,6 @@
         let apiDays = '7';
         const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${apiCity}&days=${apiDays}&aqi=yes&alerts=yes`;
 
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${apiKey}`,
-            },
-        };
-
         fetch(apiUrl)
             .then(response => {
                 if (!response.ok) {
