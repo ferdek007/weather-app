@@ -42,7 +42,30 @@
                         </div>
                         <button type="button" class="btn btn-primary" onclick="getWeather()">Wyszukaj</button>
                     </form>
-                    <div id="weatherInfo"></div>
+                    <div id="weatherInfo">
+                        <div class="container">
+                            <div class="card card-1">
+                                <div id="demo" class="carousel slide" data-ride="carousel">
+
+                                    <!-- The slideshow -->
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="temp" id="temp">23&deg;</div>
+                                                    <div class="location" id="location">Coimbra, Portugal</div>
+                                                </div>
+                                                <div class="col-6 justify-content-right">
+                                                    <img class="img-fluid" src="img/icons8-sun-144.png">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,32 +74,34 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        const apiKey = '36928e99bab645ad9b6173713240803';
-        let apiCity = 'Warsaw';
-        let apiDays = '7';
-        const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${apiCity}&days=${apiDays}&aqi=yes&alerts=yes`;
 
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        throw new Error('Data not found');
-                    } else if (response.status === 500) {
-                        throw new Error('Server error');
-                    } else {
-                        throw new Error('Network response was not ok');
-                    }
-                }
-                return response.json();
-            })
-            .then(data => {
-                // outputElement.textContent = JSON.stringify(data, null, 2);
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="api.js"></script>
+    <script>
+        const getWeather = () => {
+            const location = document.getElementById('locationInput').value;
+            fetchForecastData(location).then((data) => {
                 console.log(data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
+                updateHTML(data);
             });
+        }
+
+        const updateHTML = (data) => {
+            const currentDataContainer = document.getElementById('temp');
+            const locationContainer = document.getElementById('location');
+
+            currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C<br>${data.current.temp_f}&deg;F`;
+            locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
+        };
+
+        // set default
+        let city = 'Berlin';
+
+        fetchForecastData(city).then((data) => {
+            console.log(data);
+            updateHTML(data);
+        });
+
     </script>
 </body>
 
