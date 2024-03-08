@@ -1,0 +1,2 @@
+60 zapytań co minutę
+pogoda 3 w przód co 3h
