@@ -78,12 +78,32 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="api.js"></script>
     <script>
+        const normlaizeWord = (word) => {
+            const polishLetters = {
+                'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
+                'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z'
+            };
+
+            let normlaizedWord = word.toLowerCase();
+
+            for (const char in polishLetters){
+                const regex = new RegExp(char, 'g');
+                normlaizedWord = normlaizedWord.replace(regex, polishLetters[char]);
+            }
+
+            return normlaizedWord;
+        }
+
         const getWeather = () => {
-            const location = document.getElementById('locationInput').value;
-            fetchForecastData(location).then((data) => {
-                console.log(data);
-                updateHTML(data);
-            });
+            if(document.getElementById("locationInput").value!=""){
+                const location = document.getElementById('locationInput').value;
+                fetchForecastData(normlaizeWord(location)).then((data) => {
+                    console.log(data);
+                    updateHTML(data);
+                });
+            } else {
+                alert("Wprowadź poprawną lokalizację!");
+            }
         }
 
         const updateHTML = (data) => {
