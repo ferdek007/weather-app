@@ -6,9 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Aplikacja Pogodowa</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
         body {
             background-color: #f8f9fa;
+            margin: 0 auto;
         }
 
         .container {
@@ -25,6 +39,18 @@
 
         h1 {
             color: #007bff;
+        }
+
+        #map-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #map {
+            height: 50%;
+            width: 50%;
+            position: absolute;
         }
     </style>
 </head>
@@ -70,6 +96,9 @@
             </div>
         </div>
     </div>
+    <div id="map-container">
+        <div id="map"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
@@ -77,6 +106,8 @@
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="api.js"></script>
+    <!-- <script src="mapConfig.js"></script> -->
+
     <script>
         const normlaizeWord = (word) => {
             const polishLetters = {
@@ -86,7 +117,7 @@
 
             let normlaizedWord = word.toLowerCase();
 
-            for (const char in polishLetters){
+            for (const char in polishLetters) {
                 const regex = new RegExp(char, 'g');
                 normlaizedWord = normlaizedWord.replace(regex, polishLetters[char]);
             }
@@ -95,7 +126,7 @@
         }
 
         const getWeather = () => {
-            if(document.getElementById("locationInput").value!=""){
+            if (document.getElementById("locationInput").value != "") {
                 const location = document.getElementById('locationInput').value;
                 fetchForecastData(normlaizeWord(location)).then((data) => {
                     console.log(data);
@@ -114,13 +145,66 @@
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
         };
 
-        // set default
-        let city = 'Berlin';
+        // map
+        const map = L.map('map').setView([48, 21], 4);
 
-        fetchForecastData(city).then((data) => {
-            console.log(data);
-            updateHTML(data);
-        });
+        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        const popupMarker = L.marker();
+        let latitude;
+        let longitude;
+
+        function onMapClick(e) {
+            latitude = e.latlng.lat.toFixed(4);
+            longitude = e.latlng.lng.toFixed(4);
+
+            popupMarker
+                .setLatLng(e.latlng)
+                .addTo(map)
+                // .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
+                .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
+                .openPopup();
+
+            //console.log(e);
+        }
+
+        function onLocationClick() {
+            fetchForecastData(`${latitude},${longitude}`).then((data) => {
+                console.log(data);
+                updateHTML(data);
+            });
+        }
+
+        map.on('click', onMapClick);
+        popupMarker.on('click', onLocationClick);
+
+        function success(pos) {
+            const crd = pos.coords;
+
+            // console.log(crd);
+
+            fetchForecastData(`${crd.latitude},${crd.longitude}`).then((data) => {
+                console.log(data);
+                updateHTML(data);
+            });
+        }
+
+        function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+
+            // default
+            let city = "Berlin";
+
+            fetchForecastData(city).then((data) => {
+                console.log(data);
+                updateHTML(data);
+            });
+        }
+
+        navigator.geolocation.getCurrentPosition(success, error);
 
     </script>
 </body>
