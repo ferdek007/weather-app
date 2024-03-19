@@ -29,12 +29,22 @@
             margin-top: 50px;
         }
 
-        .weather-card {
+        .weather-card-input {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             text-align: center;
+        }
+
+        .weather-card-map {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            height: 300px;
         }
 
         h1 {
@@ -48,8 +58,8 @@
         }
 
         #map {
-            height: 50%;
-            width: 50%;
+            height: 85%;
+            width: 80%;
             position: absolute;
         }
     </style>
@@ -59,7 +69,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="weather-card">
+                <div class="weather-card-input">
                     <h1>Aplikacja Pogodowa</h1>
                     <p>Wprowadź lokalizację do sprawdzenia:</p>
                     <form id="weatherForm">
@@ -96,8 +106,14 @@
             </div>
         </div>
     </div>
-    <div id="map-container">
-        <div id="map"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="weather-card-map">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -145,6 +161,17 @@
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
         };
 
+        try {
+            const location = localStorage.getItem('location');
+
+            fetchForecastData(location).then((data) => {
+                console.log(data);
+                updateHTML(data);
+            });
+        } catch (err) {
+            console.error(err);
+        }
+
         // map
         const map = L.map('map').setView([48, 21], 4);
 
@@ -160,19 +187,27 @@
         function onMapClick(e) {
             latitude = e.latlng.lat.toFixed(4);
             longitude = e.latlng.lng.toFixed(4);
+            localStorage.setItem('location', `${latitude},${longitude}`);
+            localStorage.setItem('lat', latitude);
+            localStorage.setItem('lng', longitude);
 
-            popupMarker
-                .setLatLng(e.latlng)
-                .addTo(map)
-                // .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
-                .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
-                .openPopup();
+            window.location.href = "map.html";
+
+            // popupMarker
+            //     .setLatLng(e.latlng)
+            //     .addTo(map)
+            //     // .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
+            //     .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
+            //     .openPopup();
 
             //console.log(e);
         }
 
         function onLocationClick() {
+            const location = localStorage.getItem('location');
+
             fetchForecastData(`${latitude},${longitude}`).then((data) => {
+                // fetchForecastData(location).then((data) => {
                 console.log(data);
                 updateHTML(data);
             });
@@ -196,12 +231,12 @@
             console.warn(`ERROR(${err.code}): ${err.message}`);
 
             // default
-            let city = "Berlin";
+            // let city = "Berlin";
 
-            fetchForecastData(city).then((data) => {
-                console.log(data);
-                updateHTML(data);
-            });
+            // fetchForecastData(city).then((data) => {
+            //     console.log(data);
+            //     updateHTML(data);
+            // });
         }
 
         navigator.geolocation.getCurrentPosition(success, error);
