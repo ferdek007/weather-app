@@ -21,4 +21,4 @@ const fetchForecastData = async (location) => {
     return data;
 };
 
-module.exports = fetchForecastData; 
+// module.exports = fetchForecastData; 

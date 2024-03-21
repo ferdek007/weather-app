@@ -76,7 +76,7 @@
                     <form id="weatherForm">
                         <div class="form-group">
                             <input type="text" class="form-control" id="locationInput" placeholder="Miasto, Kraj"
-                                onchange="checkWord()">
+                                onkeypress="handleKeyPress(event)" oninput="checkWord()">
                         </div>
                         <button id="button" type="button" disabled class="btn btn-primary"
                             onclick="getWeather()">Wyszukaj</button>
@@ -130,22 +130,47 @@
     <!-- <script src="mapConfig.js"></script> -->
 
     <script>
+        const handleKeyPress = (event) => {
+            // get the pressed key Unicode
+            const charCode = event.keyCode || event.which;
+            const charStr = String.fromCharCode(charCode);
+            const lettersRegex = /^[A-Za-zĄąĆćĘęŁłŃńÓóŚśŹźŻż ]+$/;
+
+            if (!lettersRegex.test(charStr)) {
+                event.preventDefault();
+            }
+
+            // if 'Enter' key pressed
+            if (event.keyCode === 13) {
+                event.preventDefault();
+
+                const word = document.getElementById("locationInput").value;
+
+                if (checkLetters(word)) {
+                    getWeather();
+                } else {
+                    alert("Wprowadź poprawną lokalizację!");
+                }
+            }
+        }
+
         const checkWord = () => {
-            let word = document.getElementById("locationInput").value;
-            if (checkLetters(word)) {
+            const word = document.getElementById("locationInput").value;
+
+            if (word.trim() !== "" && checkLetters(word)) {
                 document.getElementById("button").removeAttribute("disabled");
             } else {
                 document.getElementById("button").setAttribute("disabled", "disabled");
             }
-
         }
 
         const checkLetters = (word) => {
-            const regex = /^[a-zA-Z]+$/;
+            word = normalizeWord(word);
+            const regex = /^[a-zA-Z ]+$/;
             return regex.test(word);
         }
 
-        const normlaizeWord = (word) => {
+        const normalizeWord = (word) => {
             const polishLetters = {
                 'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
                 'ó': 'o', 'ś': 's', 'ź': 'z', 'ż': 'z'
@@ -162,9 +187,11 @@
         }
 
         const getWeather = () => {
-            if (document.getElementById("locationInput").value != "") {
+            const word = document.getElementById("locationInput").value;
+
+            if (word.trim() !== "") {
                 const location = document.getElementById('locationInput').value;
-                fetchForecastData(normlaizeWord(location)).then((data) => {
+                fetchForecastData(normalizeWord(location)).then((data) => {
                     console.log(data);
                     updateHTML(data);
                 });
