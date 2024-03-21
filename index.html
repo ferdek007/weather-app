@@ -74,9 +74,9 @@
                     <p>Wprowadź lokalizację do sprawdzenia:</p>
                     <form id="weatherForm">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="locationInput" placeholder="Miasto, Kraj">
+                            <input type="text" class="form-control" id="locationInput" placeholder="Miasto, Kraj" onchange="checkWord()">
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="getWeather()">Wyszukaj</button>
+                        <button id="button" type="button" disabled class="btn btn-primary" onclick="getWeather()">Wyszukaj</button>
                     </form>
                     <div id="weatherInfo">
                         <div class="container">
@@ -125,6 +125,21 @@
     <!-- <script src="mapConfig.js"></script> -->
 
     <script>
+        const checkWord = () => {
+            let word = document.getElementById("locationInput").value;
+            if(checkLetters(word)){
+                document.getElementById("button").removeAttribute("disabled");
+            } else {
+                document.getElementById("button").setAttribute("disabled", "disabled");
+            }
+
+        }
+
+        const checkLetters = (word) => {
+            const regex = /^[a-zA-Z]+$/;
+            return regex.test(word);
+        }
+
         const normlaizeWord = (word) => {
             const polishLetters = {
                 'ą': 'a', 'ć': 'c', 'ę': 'e', 'ł': 'l', 'ń': 'n',
