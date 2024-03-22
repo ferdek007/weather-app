@@ -4,7 +4,7 @@ const DEFAULT_ZOOM = 7;
 const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
-const map = L.map('map')
+const map = L.map('map');
 
 if (localStorage.getItem('lat') && localStorage.getItem('lng')) {
     const SELECTED_COORDS = [localStorage.getItem('lat'), localStorage.getItem('lng')];
@@ -19,7 +19,7 @@ const tiles = L.tileLayer(TILE_LAYER, {
     attribution: ATTRIBUTION
 }).addTo(map);
 
-const greenIcon = new L.Icon({
+const violetIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
@@ -28,7 +28,7 @@ const greenIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
-const popupMarker = L.marker([], { icon: greenIcon });
+const popupMarker = L.marker([], { icon: violetIcon });
 
 const setMarker = () => {
     const latlng = localStorage.getItem('location').split(',');

@@ -1,11 +1,11 @@
 const API_KEY = '36928e99bab645ad9b6173713240803';
 const BASE_URL = 'https://api.weatherapi.com/v1';
-const FORCAST_DAYS = '7';
+const FORECAST_DAYS = '7';
 const LANGUAGE = 'pl';
 
 const DEFAULT_PARAMS = {
     key: API_KEY,
-    days: FORCAST_DAYS,
+    days: FORECAST_DAYS,
     lang: LANGUAGE
 };
 
