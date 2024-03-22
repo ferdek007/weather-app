@@ -1,6 +1,5 @@
 const API_KEY = '36928e99bab645ad9b6173713240803';
 const BASE_URL = 'https://api.weatherapi.com/v1';
-const FORCAST_CITY = 'Warsaw';
 const FORCAST_DAYS = '7';
 const LANGUAGE = 'pl';
 
@@ -11,14 +10,27 @@ const DEFAULT_PARAMS = {
 };
 
 const fetchForecastData = async (location) => {
-    const { data } = await axios.get(`${BASE_URL}/forecast.json`, {
-        params: {
-            ...DEFAULT_PARAMS,
-            q: location,
+    try {
+        const { data } = await axios.get(`${BASE_URL}/forecast.json`, {
+            params: {
+                ...DEFAULT_PARAMS,
+                q: location,
+            }
+        });
+
+        return data;
+    } catch (err) {
+        if (err.response) {
+            console.error("Request was made but received an error response:");
+            console.error("Status Code:", err.response.status);
+            console.error("Response Data:", err.response.data);
+            console.error("Error Message:", err.response.data.error.message);
+
+            if (err.response.status === 400) {
+                alert(err.response.data.error.message);
+            } else {
+                alert("An error occurred while fetching forecast data. Please try again later.");
+            }
         }
-    });
-
-    return data;
+    }
 };
-
-// module.exports = fetchForecastData; 

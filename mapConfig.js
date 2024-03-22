@@ -1,77 +1,69 @@
 const CENTRE_OF_EUROPE = [48, 21];
 const DEFAULT_ZOOM = 7;
 
-const SELECTED_COORDS = [localStorage.getItem('lat'), localStorage.getItem('lng')];
+const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+const ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
-const map = L.map('map').setView(SELECTED_COORDS, DEFAULT_ZOOM);
+const map = L.map('map')
 
-const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+if (localStorage.getItem('lat') && localStorage.getItem('lng')) {
+    const SELECTED_COORDS = [localStorage.getItem('lat'), localStorage.getItem('lng')];
+    map.setView(SELECTED_COORDS, DEFAULT_ZOOM);
+} else {
+    const ZOOM = 5;
+    map.setView(CENTRE_OF_EUROPE, ZOOM);
+};
+
+const tiles = L.tileLayer(TILE_LAYER, {
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: ATTRIBUTION
 }).addTo(map);
 
-const popupMarker = L.marker();
-let latitude;
-let longitude;
+const greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
 
-function onMapClick(e) {
-    latitude = e.latlng.lat.toFixed(4);
-    longitude = e.latlng.lng.toFixed(4);
+const popupMarker = L.marker([], { icon: greenIcon });
+
+const setMarker = () => {
+    const latlng = localStorage.getItem('location').split(',');
+
+    popupMarker
+        .setLatLng(latlng)
+        .addTo(map)
+};
+
+if (localStorage.getItem('location')) {
+    setMarker();
+}
+
+const onMapClick = (e) => {
+    const latitude = e.latlng.lat.toFixed(4);
+    const longitude = e.latlng.lng.toFixed(4);
+
+    const popupText = `LAT: ${latitude}, LNG: ${longitude}<br><button id="selectButton" type="button" class="btn btn-primary"
+    onclick="selectLocation()">Wybierz</button>`;
 
     popupMarker
         .setLatLng(e.latlng)
         .addTo(map)
-        .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
-        // .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
+        .bindPopup(popupText)
         .openPopup();
 
     localStorage.setItem('location', `${latitude},${longitude}`);
+    localStorage.setItem('lat', latitude);
+    localStorage.setItem('lng', longitude);
 
     //console.log(e);
 }
 
 map.on('click', onMapClick);
 
-function success(pos) {
-    const crd = pos.coords;
-
-    console.log(crd);
-
-    latitude = crd.latitude.toFixed(4);
-    longitude = crd.longitude.toFixed(4);
-
-    const latlng = {
-        lat: latitude,
-        lng: longitude
-    }
-
-    popupMarker
-        .setLatLng(latlng)
-        .addTo(map)
-        .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
-        // .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
-        .openPopup();
-
-    localStorage.setItem('location', `${latitude},${longitude}`);
-
-
-
-    // fetchForecastData(`${crd.latitude},${crd.longitude}`).then((data) => {
-    //     console.log(data);
-    //     updateHTML(data);
-    // });
-}
-
-function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-
-    // default
-    // let city = "Berlin";
-
-    // fetchForecastData(city).then((data) => {
-    //     console.log(data);
-    //     updateHTML(data);
-    // });
-}
-
-navigator.geolocation.getCurrentPosition(success, error);
+const selectLocation = () => {
+    window.location.href = "index.html";
+};

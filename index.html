@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Aplikacja Pogodowa</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -78,7 +79,7 @@
                             <input type="text" class="form-control" id="locationInput" placeholder="Miasto, Kraj"
                                 onkeypress="handleKeyPress(event)" oninput="checkWord()">
                         </div>
-                        <button id="button" type="button" disabled class="btn btn-primary"
+                        <button id="searchButton" type="button" disabled class="btn btn-primary"
                             onclick="getWeather()">Wyszukaj</button>
                     </form>
                     <div id="weatherInfo">
@@ -104,6 +105,10 @@
                                 </div>
                             </div>
                         </div>
+                        <button id="locationButton" type="button" class="btn btn-primary"
+                            onclick="getUsersLocation()">Lokalizuj</button>
+                        <button id="selectButton" type="button" disabled class="btn btn-primary"
+                            onclick="">Wybierz</button>
                     </div>
                 </div>
             </div>
@@ -120,14 +125,13 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="api.js"></script>
-    <!-- <script src="mapConfig.js"></script> -->
 
     <script>
         const handleKeyPress = (event) => {
@@ -158,9 +162,9 @@
             const word = document.getElementById("locationInput").value;
 
             if (word.trim() !== "" && checkLetters(word)) {
-                document.getElementById("button").removeAttribute("disabled");
+                document.getElementById("searchButton").removeAttribute("disabled");
             } else {
-                document.getElementById("button").setAttribute("disabled", "disabled");
+                document.getElementById("searchButton").setAttribute("disabled", "disabled");
             }
         }
 
@@ -191,8 +195,20 @@
 
             if (word.trim() !== "") {
                 const location = document.getElementById('locationInput').value;
+
                 fetchForecastData(normalizeWord(location)).then((data) => {
                     console.log(data);
+
+                    const latitude = data.location.lat;
+                    const longitude = data.location.lon;
+                    localStorage.setItem('location', `${latitude},${longitude}`);
+
+                    localStorage.setItem('lat', latitude);
+                    localStorage.setItem('lng', longitude);
+
+                    setMapCoords();
+                    setMarker();
+
                     updateHTML(data);
                 });
             } else {
@@ -208,65 +224,104 @@
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
         };
 
-        try {
+        // map
+        const DEFAULT_LOCATION = 'Berlin';
+        const CENTRE_OF_EUROPE = [48, 21];
+        const DEFAULT_ZOOM = 5;
+
+        const TILE_LAYER = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+        const ATTRIBUTION = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+
+        const map = L.map('map').setView(CENTRE_OF_EUROPE, DEFAULT_ZOOM);
+
+        const tiles = L.tileLayer(TILE_LAYER, {
+            maxZoom: 19,
+            attribution: ATTRIBUTION
+        }).addTo(map);
+
+        const greenIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        const popupMarker = L.marker([], { icon: greenIcon });
+
+        const setMarker = () => {
+            const latlng = localStorage.getItem('location').split(',');
+
+            popupMarker
+                .setLatLng(latlng)
+                .addTo(map)
+        };
+
+        const setMapCoords = () => {
+            const SELECTED_COORDS = [localStorage.getItem('lat'), localStorage.getItem('lng')];
+            map.setView(SELECTED_COORDS, DEFAULT_ZOOM);
+        };
+
+        if (localStorage.getItem('location')) {
+
             const location = localStorage.getItem('location');
 
             fetchForecastData(location).then((data) => {
                 console.log(data);
                 updateHTML(data);
             });
-        } catch (err) {
-            console.error(err);
-        }
 
-        // map
-        const map = L.map('map').setView([48, 21], 4);
+            setMapCoords();
 
-        const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        const popupMarker = L.marker();
-        let latitude;
-        let longitude;
-
-        function onMapClick(e) {
-            latitude = e.latlng.lat.toFixed(4);
-            longitude = e.latlng.lng.toFixed(4);
-            localStorage.setItem('location', `${latitude},${longitude}`);
-            localStorage.setItem('lat', latitude);
-            localStorage.setItem('lng', longitude);
-
-            window.location.href = "map.html";
-
-            // popupMarker
-            //     .setLatLng(e.latlng)
-            //     .addTo(map)
-            //     // .bindPopup(`<a href='index.html'>LAT: ${latitude}, LNG: ${longitude}</a>`)
-            //     .bindPopup(`LAT: ${latitude}, LNG: ${longitude}`)
-            //     .openPopup();
-
-            //console.log(e);
-        }
-
-        function onLocationClick() {
-            const location = localStorage.getItem('location');
-
-            fetchForecastData(`${latitude},${longitude}`).then((data) => {
-                // fetchForecastData(location).then((data) => {
+            setMarker();
+        } else {
+            // default
+            fetchForecastData(DEFAULT_LOCATION).then((data) => {
                 console.log(data);
+
+                const latitude = data.location.lat;
+                const longitude = data.location.lon;
+                localStorage.setItem('location', `${latitude},${longitude}`);
+
+                localStorage.setItem('lat', latitude);
+                localStorage.setItem('lng', longitude);
+
+                setMapCoords();
+                setMarker();
+
+
                 updateHTML(data);
             });
         }
 
-        map.on('click', onMapClick);
-        popupMarker.on('click', onLocationClick);
+        const onMapClick = (e) => {
+            const latitude = e.latlng.lat.toFixed(4);
+            const longitude = e.latlng.lng.toFixed(4);
 
-        function success(pos) {
+            // set the clicked location
+            localStorage.setItem('lat', latitude);
+            localStorage.setItem('lng', longitude);
+
+            window.location.href = "map.html";
+        }
+
+        map.on('click', onMapClick);
+
+        const success = (pos) => {
             const crd = pos.coords;
+            const latitude = crd.latitude;
+            const longitude = crd.longitude;
 
             // console.log(crd);
+
+            localStorage.setItem('location', `${latitude},${longitude}`);
+
+            localStorage.setItem('lat', latitude);
+            localStorage.setItem('lng', longitude);
+
+            setMapCoords();
+            setMarker();
 
             fetchForecastData(`${crd.latitude},${crd.longitude}`).then((data) => {
                 console.log(data);
@@ -274,19 +329,31 @@
             });
         }
 
-        function error(err) {
+        const error = (err) => {
             console.warn(`ERROR(${err.code}): ${err.message}`);
 
             // default
-            // let city = "Berlin";
+            fetchForecastData(DEFAULT_LOCATION).then((data) => {
+                console.log(data);
 
-            // fetchForecastData(city).then((data) => {
-            //     console.log(data);
-            //     updateHTML(data);
-            // });
+                const latitude = data.location.lat;
+                const longitude = data.location.lon;
+                localStorage.setItem('location', `${latitude},${longitude}`);
+
+                localStorage.setItem('lat', latitude);
+                localStorage.setItem('lng', longitude);
+
+                setMapCoords();
+                setMarker();
+
+
+                updateHTML(data);
+            });
         }
 
-        navigator.geolocation.getCurrentPosition(success, error);
+        const getUsersLocation = () => {
+            navigator.geolocation.getCurrentPosition(success, error);
+        };
 
     </script>
 </body>
