@@ -15,6 +15,9 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
+    <script src="https://kit.fontawesome.com/850f146030.js" crossorigin="anonymous"></script>
+
+
     <style>
         html,
         body {
@@ -46,23 +49,17 @@
             padding: 20px;
             display: flex;
             justify-content: center;
-            height: 300px;
+            height: 350px;
         }
 
-        h1 {
+        h1, h3 {
             color: #007bff;
         }
 
-        #map-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
         #map {
-            height: 85%;
-            width: 80%;
-            position: absolute;
+            height: 100%;
+            width: 100%;
+            position: relative;
         }
     </style>
 </head>
@@ -75,40 +72,26 @@
                     <h1>Aplikacja Pogodowa</h1>
                     <p>Wprowadź lokalizację do sprawdzenia:</p>
                     <form id="weatherForm">
-                        <div class="form-group">
+                        <div class="d-flex">
                             <input type="text" class="form-control" id="locationInput" placeholder="Miasto, Kraj"
                                 onkeypress="handleKeyPress(event)" oninput="checkWord()">
+                            <button id="searchButton" type="button" disabled class="btn btn-primary"
+                                onclick="getWeather()">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-magnifying-glass mx-2"></i>
+                                </div>
+                            </button>
                         </div>
-                        <button id="searchButton" type="button" disabled class="btn btn-primary"
-                            onclick="getWeather()">Wyszukaj</button>
                     </form>
                     <div id="weatherInfo">
                         <div class="container">
-                            <div class="card card-1">
-                                <div id="demo" class="carousel slide" data-ride="carousel">
-
-                                    <!-- The slideshow -->
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="temp" id="temp">23&deg;</div>
-                                                    <div class="location" id="location">Coimbra, Portugal</div>
-                                                </div>
-                                                <div class="col-6 justify-content-right">
-                                                    <img class="img-fluid" src="img/icons8-sun-144.png">
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h3>Wybrana lokalizacja</h3>
+                            <h5 class="location mb-4" id="location">Coimbra, Portugal</h5>
+                            <button id="locationButton" type="button" class="btn btn-primary"
+                                onclick="getUsersLocation()">Lokalizuj</button>
+                            <button id="selectButton" type="button" disabled class="btn btn-primary"
+                                onclick="navigateToWeatherDetails()">Wybierz</button>
                         </div>
-                        <button id="locationButton" type="button" class="btn btn-primary"
-                            onclick="getUsersLocation()">Lokalizuj</button>
-                        <button id="selectButton" type="button" disabled class="btn btn-primary"
-                            onclick="">Wybierz</button>
                     </div>
                 </div>
             </div>
@@ -163,8 +146,10 @@
 
             if (word.trim() !== "" && checkLetters(word)) {
                 document.getElementById("searchButton").removeAttribute("disabled");
+                document.getElementById("selectButton").removeAttribute("disabled");
             } else {
                 document.getElementById("searchButton").setAttribute("disabled", "disabled");
+                document.getElementById("selectButton").setAttribute("disabled", "disabled");
             }
         }
 
@@ -220,7 +205,7 @@
             const currentDataContainer = document.getElementById('temp');
             const locationContainer = document.getElementById('location');
 
-            currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C<br>${data.current.temp_f}&deg;F`;
+            // currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C<br>${data.current.temp_f}&deg;F`;
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
         };
 
@@ -239,7 +224,7 @@
             attribution: ATTRIBUTION
         }).addTo(map);
 
-        const greenIcon = new L.Icon({
+        const violetIcon = new L.Icon({
             iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
             iconSize: [25, 41],
@@ -248,7 +233,7 @@
             shadowSize: [41, 41]
         });
 
-        const popupMarker = L.marker([], { icon: greenIcon });
+        const popupMarker = L.marker([], { icon: violetIcon });
 
         const setMarker = () => {
             const latlng = localStorage.getItem('location').split(',');
@@ -267,6 +252,8 @@
 
             const location = localStorage.getItem('location');
 
+            document.getElementById("selectButton").removeAttribute("disabled");
+
             fetchForecastData(location).then((data) => {
                 console.log(data);
                 updateHTML(data);
@@ -282,6 +269,9 @@
 
                 const latitude = data.location.lat;
                 const longitude = data.location.lon;
+
+                document.getElementById("selectButton").setAttribute("disabled", "disabled");
+
                 localStorage.setItem('location', `${latitude},${longitude}`);
 
                 localStorage.setItem('lat', latitude);
@@ -353,6 +343,10 @@
 
         const getUsersLocation = () => {
             navigator.geolocation.getCurrentPosition(success, error);
+        };
+
+        const navigateToWeatherDetails = () => {
+            window.location.href = "details.html";
         };
 
     </script>
