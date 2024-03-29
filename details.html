@@ -254,7 +254,7 @@
 
         const updateHTML = (data) => {
             const locationContainer = document.getElementById('location');
-            const currentDataContainer = document.getElementById('temp');
+            const currentTempContainer = document.getElementById('temp');
             const maxminContainer = document.getElementById('max-min');
             const feelslikeContainer = document.getElementById('feels-like');
             const weathertextContainer = document.getElementById('weather-text');
@@ -291,7 +291,7 @@
             }
 
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
-            currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C`;
+            currentTempContainer.innerHTML = `${data.current.temp_c}&deg;C`;
             maxminContainer.innerHTML = `Max: ${data.forecast.forecastday[0].day.maxtemp_c}&deg;C <br> Min: ${data.forecast.forecastday[0].day.mintemp_c}&deg;C`;
             feelslikeContainer.innerHTML = `Odczuwalna: ${data.current.feelslike_c}&deg;C`;
             weathertextContainer.innerHTML = `${data.current.condition.text}`;
