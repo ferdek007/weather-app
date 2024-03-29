@@ -1,5 +1,5 @@
 // Clock
-const startTime = () => {
+const startClock = () => {
     const today = new Date();
     let hr = today.getHours();
     let min = today.getMinutes();
@@ -7,9 +7,9 @@ const startTime = () => {
     ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
     hr = (hr == 0) ? 12 : hr;
     hr = (hr > 12) ? hr - 12 : hr;
-    hr = checkTime(hr);
-    min = checkTime(min);
-    sec = checkTime(sec);
+    hr = formatTime(hr);
+    min = formatTime(min);
+    sec = formatTime(sec);
 
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -21,10 +21,10 @@ const startTime = () => {
 
     document.getElementById("clock").innerHTML = `${date}, ${hr}:${min}:${sec} ${ap}`;
 
-    const time = setTimeout(() => { startTime() }, 500);
+    const time = setTimeout(() => { startClock() }, 500);
 };
 
-const checkTime = (val) => {
+const formatTime = (val) => {
     if (val < 10) {
         val = "0" + val;
     }
