@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pogoda</title>
+    <link rel="icon" href="./img/day.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style/style.css">
 </head>
 
-<body>
+<body onload="startTime()">
     <div class="container mt-3">
         <div class="row">
             <div class="card card-2 flex-shrink-1">
@@ -21,12 +24,15 @@
                     <div class="col-6 justify-content-left">
                         <div class="location" id="location">Miasto, Kraj</div>
                         <div class="temp" id="temp">Stopnie &deg; C</div>
-                        <div class="location" id="maxmin">Max &deg; C / Min &deg; C</div>
-                        <div class="location" id="feelsike">Odczuwalna X &deg; C</div>
+                        <div class="location" id="max-min">Max &deg; C / Min &deg; C</div>
+                        <div class="location" id="feels-like">Odczuwalna X &deg; C</div>
                         <div class="location" id="clock">dzień, godzina z minutami</div>
                     </div>
                     <div class="col-6 justify-content-right">
-                        <img class="img-fluid" src="img/day.png" alt="rain">
+                        <div>
+                            <img class="img-fluid" src="img/day.png" alt="rain">
+                            <div id="weather-text">opis pogody</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,99 +41,99 @@
             <div class="card card-2 flex-shrink-1">
                 <div class="row">
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">0</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">1</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">2</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">3</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">4</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">5</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">6</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">7</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">8</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">9</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">10</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">11</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">12</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">13</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">14</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">15</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">16</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">17</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">18</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">19</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">20</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">21</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">22</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 temp-hour">0&deg;</div>
                         <div class="row row3">23</div>
                     </div>
                 </div>
@@ -137,41 +143,41 @@
             <div class="card card-2 flex-shrink-1">
                 <div class="row">
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/day.png" />
                         </div>
-                        <div class="row row3">Mon</div>
+                        <div class="row row3 day-forecast">Mon</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/clouds.png" />
                         </div>
-                        <div class="row row3">Tue</div>
+                        <div class="row row3 day-forecast">Tue</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/fog_day.png" /></div>
-                        <div class="row row3">Wed</div>
+                        <div class="row row3 day-forecast">Wed</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/snow.png" /></div>
-                        <div class="row row3">Thu</div>
+                        <div class="row row3 day-forecast">Thu</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/rain_snow.png" /></div>
-                        <div class="row row3">Fri</div>
+                        <div class="row row3 day-forecast">Fri</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/wet_storm.png" /></div>
-                        <div class="row row3">Sat</div>
+                        <div class="row row3 day-forecast">Sat</div>
                     </div>
                     <div class="col">
-                        <div class="row row1">0&deg;</div>
+                        <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/partly_cloudy_day.png" /></div>
-                        <div class="row row3">Sun</div>
+                        <div class="row row3 day-forecast">Sun</div>
                     </div>
                 </div>
             </div>
@@ -180,57 +186,123 @@
             <div class="col-md-4">
                 <div class="card card-2">
                     <div class="location">Wilgotność</div>
-                    <div class="location">X %</div>
+                    <div class="location" id="humidity">X %</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2">
                     <div class="location">Wiatr</div>
-                    <div class="location">Kierunke Moc</div>
+                    <div class="location" id="wind">Kierunek Moc</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2">
                     <div class="location">Ciśnienie</div>
-                    <div class="location">x mb</div>
+                    <div class="location" id="pressure">x hPa</div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-2">
-                    <div class="location">Wsóch/Zachód</div>
-                    <div class="location">godzina/godzina</div>
+                    <div class="location">Wschód/Zachód</div>
+                    <div class="location" id="sun">godzina/godzina</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2">
                     <div class="location">Faza książyca</div>
-                    <div class="location">Nazwa</div>
+                    <div class="location" id="moon">Nazwa</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2">
                     <div class="location">Indeks UV</div>
-                    <div class="location">Niski/Średni/Wysoki</div>
+                    <div class="location" id="uv-index">Niski/Średni/Wysoki</div>
                 </div>
             </div>
         </div>
 
     </div>
-
+    <script src="clock.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="api.js"></script>
 
     <script>
         const DEFAULT_LOCATION = 'Berlin';
 
-        const updateHTML = (data) => {
-            const currentDataContainer = document.getElementById('temp');
-            const locationContainer = document.getElementById('location');
+        const getWeekdayIndexFromTimestamp = (timestamp) => {
+            // Create a new Date object from the timestamp (convert milliseconds to seconds)
+            const date = new Date(timestamp * 1000);
 
-            currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C`;
+            // Get the weekday index (0 for Monday, 1 for Tuesday, ..., 6 for Sunday)
+            var weekdayIndex = (date.getDay() + 6) % 7;
+
+            return weekdayIndex;
+        };
+
+        const getWeekdayFromTimestamp = (timestamp) => {
+            // Create a new Date object from the timestamp (convert milliseconds to seconds)
+            const date = new Date(timestamp * 1000);
+
+            const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            var weekdayIndex = getWeekdayIndexFromTimestamp(timestamp);
+
+            return weekdays[weekdayIndex];
+        };
+
+        const updateHTML = (data) => {
+            const locationContainer = document.getElementById('location');
+            const currentDataContainer = document.getElementById('temp');
+            const maxminContainer = document.getElementById('max-min');
+            const feelslikeContainer = document.getElementById('feels-like');
+            const weathertextContainer = document.getElementById('weather-text');
+
+            const humidityContainer = document.getElementById('humidity');
+            const windContainer = document.getElementById('wind');
+            const pressureContainer = document.getElementById('pressure');
+
+            const sunContainer = document.getElementById('sun');
+            const moonContainer = document.getElementById('moon');
+            const uvindexContainer = document.getElementById('uv-index');
+
+            const tempHourElements = document.getElementsByClassName('temp-hour');
+
+            for (let i = 0; i < tempHourElements.length; i++) {
+                tempHourElements[i].innerHTML = `${data.forecast.forecastday[0].hour[i].temp_c}&deg;C`;
+            }
+
+            const dayForecastTempElements = document.getElementsByClassName('day-forecast-temp');
+            const dayForecastElements = document.getElementsByClassName('day-forecast');
+
+            for (let i = 0; i < data.forecast.forecastday.length; i++) {
+                if (i < 7) {
+                    const forecastTimestamp = data.forecast.forecastday[i].date_epoch;
+
+                    const weekdayIndex = getWeekdayIndexFromTimestamp(forecastTimestamp);
+                    dayForecastTempElements[i].innerHTML = `${data.forecast.forecastday[i].day.avgtemp_c}&deg;C`;
+
+                    const weekday = getWeekdayFromTimestamp(forecastTimestamp);
+                    dayForecastElements[i].innerHTML = `${weekday}<br>${data.forecast.forecastday[i].date}`;
+                } else {
+                    break;
+                }
+            }
+
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
+            currentDataContainer.innerHTML = `${data.current.temp_c}&deg;C`;
+            maxminContainer.innerHTML = `Max: ${data.forecast.forecastday[0].day.maxtemp_c}&deg;C <br> Min: ${data.forecast.forecastday[0].day.mintemp_c}&deg;C`;
+            feelslikeContainer.innerHTML = `Odczuwalna: ${data.current.feelslike_c}&deg;C`;
+            weathertextContainer.innerHTML = `${data.current.condition.text}`;
+
+            humidityContainer.innerHTML = `${data.current.humidity}%`;
+            windContainer.innerHTML = `Kierunek: ${data.current.wind_dir}<br>Prędkość: ${data.current.wind_kph} km/h`;
+            pressureContainer.innerHTML = `${data.current.pressure_mb} hPa`;
+
+            sunContainer.innerHTML = `${data.forecast.forecastday[0].astro.sunrise}<br>${data.forecast.forecastday[0].astro.sunset}`;
+            moonContainer.innerHTML = `${data.forecast.forecastday[0].astro.moon_phase}<br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
+            uvindexContainer.innerHTML = `${data.current.uv}`;
         };
 
         if (localStorage.getItem('location')) {
