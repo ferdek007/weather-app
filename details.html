@@ -142,39 +142,39 @@
         <div class="row">
             <div class="card card-2 flex-shrink-1">
                 <div class="row">
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/day.png" />
                         </div>
                         <div class="row row3 day-forecast">Mon</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/clouds.png" />
                         </div>
                         <div class="row row3 day-forecast">Tue</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/fog_day.png" /></div>
                         <div class="row row3 day-forecast">Wed</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/snow.png" /></div>
                         <div class="row row3 day-forecast">Thu</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/rain_snow.png" /></div>
                         <div class="row row3 day-forecast">Fri</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/wet_storm.png" /></div>
                         <div class="row row3 day-forecast">Sat</div>
                     </div>
-                    <div class="col">
+                    <div class="col text-center">
                         <div class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid" src="img/partly_cloudy_day.png" /></div>
                         <div class="row row3 day-forecast">Sun</div>
@@ -184,19 +184,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Wilgotność</div>
                     <div class="location" id="humidity">X %</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Wiatr</div>
                     <div class="location" id="wind">Kierunek Moc</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Ciśnienie</div>
                     <div class="location" id="pressure">x hPa</div>
                 </div>
@@ -204,19 +204,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Wschód/Zachód</div>
                     <div class="location" id="sun">godzina/godzina</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Faza książyca</div>
                     <div class="location" id="moon">Nazwa</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2">
+                <div class="card card-2 text-center">
                     <div class="location">Indeks UV</div>
                     <div class="location" id="uv-index">Niski/Średni/Wysoki</div>
                 </div>
@@ -301,7 +301,7 @@
             pressureContainer.innerHTML = `${data.current.pressure_mb} hPa`;
 
             sunContainer.innerHTML = `${data.forecast.forecastday[0].astro.sunrise}<br>${data.forecast.forecastday[0].astro.sunset}`;
-            moonContainer.innerHTML = `${data.forecast.forecastday[0].astro.moon_phase}<br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
+            moonContainer.innerHTML = `${data.forecast.forecastday[0].astro.moon_phase}<br><br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
             uvindexContainer.innerHTML = `${data.current.uv}`;
         };
 

@@ -250,6 +250,26 @@
             map.setView(SELECTED_COORDS, DEFAULT_ZOOM);
         };
 
+        const setDefaultLocation = () => {
+            fetchForecastData(DEFAULT_LOCATION).then((data) => {
+                console.log(data);
+
+                const latitude = data.location.lat;
+                const longitude = data.location.lon;
+
+                localStorage.setItem('location', `${latitude},${longitude}`);
+
+                localStorage.setItem('lat', latitude);
+                localStorage.setItem('lng', longitude);
+
+                setMapCoords();
+                setMarker();
+
+                updateHTML(data);
+                document.getElementById("selectButton").removeAttribute("disabled");
+            });
+        };
+
         if (localStorage.getItem('location')) {
 
             const location = localStorage.getItem('location');
@@ -265,24 +285,7 @@
             setMarker();
         } else {
             // default
-            fetchForecastData(DEFAULT_LOCATION).then((data) => {
-                console.log(data);
-
-                const latitude = data.location.lat;
-                const longitude = data.location.lon;
-
-                document.getElementById("selectButton").setAttribute("disabled", "disabled");
-
-                localStorage.setItem('location', `${latitude},${longitude}`);
-
-                localStorage.setItem('lat', latitude);
-                localStorage.setItem('lng', longitude);
-
-                setMapCoords();
-                setMarker();
-
-                updateHTML(data);
-            });
+            setDefaultLocation();
         }
 
         const onMapClick = (e) => {
@@ -317,28 +320,18 @@
                 console.log(data);
                 updateHTML(data);
             });
+
+            // location.reload();
         }
 
         const error = (err) => {
             console.warn(`ERROR(${err.code}): ${err.message}`);
 
             // default
-            fetchForecastData(DEFAULT_LOCATION).then((data) => {
-                console.log(data);
+            setDefaultLocation();
 
-                const latitude = data.location.lat;
-                const longitude = data.location.lon;
-                localStorage.setItem('location', `${latitude},${longitude}`);
-
-                localStorage.setItem('lat', latitude);
-                localStorage.setItem('lng', longitude);
-
-                setMapCoords();
-                setMarker();
-
-                updateHTML(data);
-            });
-        }
+            // location.reload();
+        };
 
         const getUsersLocation = () => {
             navigator.geolocation.getCurrentPosition(success, error);
