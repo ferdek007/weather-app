@@ -184,19 +184,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_1">
                     <div class="location">Wilgotność</div>
                     <div class="location" id="humidity">X %</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_2">
                     <div class="location">Wiatr</div>
                     <div class="location" id="wind">Kierunek Moc</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_3">
                     <div class="location">Ciśnienie</div>
                     <div class="location" id="pressure">x hPa</div>
                 </div>
@@ -204,19 +204,19 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_4">
                     <div class="location">Wschód/Zachód</div>
                     <div class="location" id="sun">godzina/godzina</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_5">
                     <div class="location">Faza książyca</div>
                     <div class="location" id="moon">Nazwa</div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-2 text-center">
+                <div class="card card-2 text-center" id="extraData_6">
                     <div class="location">Indeks UV</div>
                     <div class="location" id="uv-index">Niski/Średni/Wysoki</div>
                 </div>
@@ -230,6 +230,32 @@
 
     <script>
         const DEFAULT_LOCATION = 'Berlin';
+
+        window.addEventListener('resize', function () {
+            const cards = [
+                document.getElementById("extraData_1"),
+                document.getElementById("extraData_2"),
+                document.getElementById("extraData_3"),
+                document.getElementById("extraData_4"),
+                document.getElementById("extraData_5"),
+                document.getElementById("extraData_6")
+            ]
+
+            let biggestHeight = 0;
+            cards.forEach(card => {
+                if (card.offsetHeight > biggestHeight) {
+                    biggestHeight = card.offsetHeight;
+                }
+            });
+
+            console.log(biggestHeight);
+
+            cards.forEach(card => {
+                card.style.height = biggestHeight + "px";
+            });
+
+        }, true);
+
 
         const getWeekdayIndexFromTimestamp = (timestamp) => {
             // Create a new Date object from the timestamp (convert milliseconds to seconds)
