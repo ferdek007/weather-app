@@ -31,7 +31,8 @@
                     </div>
                     <div class="col-6 justify-content-right">
                         <div>
-                            <img class="img-fluid" src="imgs/day.png" alt="rain">
+                            <img class="img-fluid" id="current-weather-image" src="imgs/day.png"
+                                alt="current-weather-image">
                             <div class="txt-fluid" id="weather-text">opis pogody</div>
                         </div>
                     </div>
@@ -145,39 +146,44 @@
                 <div class="row">
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/day.png" />
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/day.png" />
                         </div>
                         <div class="row row3 day-forecast">Mon</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/clouds.png" />
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/clouds.png" />
                         </div>
                         <div class="row row3 day-forecast">Tue</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/fog_day.png" /></div>
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/fog_day.png" />
+                        </div>
                         <div class="row row3 day-forecast">Wed</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/snow.png" /></div>
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/snow.png" /></div>
                         <div class="row row3 day-forecast">Thu</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/rain_snow.png" /></div>
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/rain_snow.png" />
+                        </div>
                         <div class="row row3 day-forecast">Fri</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/wet_storm.png" /></div>
+                        <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/wet_storm.png" />
+                        </div>
                         <div class="row row3 day-forecast">Sat</div>
                     </div>
                     <div class="col text-center">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
-                        <div class="row row2"><img class="img-fluid" src="imgs/partly_cloudy_day.png" /></div>
+                        <div class="row row2"><img class="img-fluid forecast-weather-image"
+                                src="imgs/partly_cloudy_day.png" />
+                        </div>
                         <div class="row row3 day-forecast">Sun</div>
                     </div>
                 </div>
@@ -282,6 +288,7 @@
             const maxminContainer = document.getElementById('max-min');
             const feelslikeContainer = document.getElementById('feels-like');
             const weathertextContainer = document.getElementById('weather-text');
+            const currentWeatherImage = document.getElementById('current-weather-image');
 
             const humidityContainer = document.getElementById('humidity');
             const windContainer = document.getElementById('wind');
@@ -299,6 +306,8 @@
 
             const dayForecastTempElements = document.getElementsByClassName('day-forecast-temp');
             const dayForecastElements = document.getElementsByClassName('day-forecast');
+            const forecastImageElements = document.getElementsByClassName('forecast-weather-image');
+
 
             for (let i = 0; i < data.forecast.forecastday.length; i++) {
                 if (i < 7) {
@@ -306,6 +315,9 @@
 
                     const weekday = getWeekdayFromTimestamp(forecastTimestamp);
                     dayForecastElements[i].innerHTML = `${weekday}<br>${data.forecast.forecastday[i].date}`;
+
+                    const forecastWeatherIconUrl = `https:${data.forecast.forecastday[i].day.condition.icon.replace("64x64", "128x128")}`;
+                    forecastImageElements[i].src = forecastWeatherIconUrl;
 
                     const weekdayIndex = getWeekdayIndexFromTimestamp(forecastTimestamp);
                     dayForecastTempElements[i].innerHTML = `${data.forecast.forecastday[i].day.avgtemp_c}&deg;C`;
@@ -320,6 +332,10 @@
             feelslikeContainer.innerHTML = `Odczuwalna: ${data.current.feelslike_c}&deg;C`;
             weathertextContainer.innerHTML = `${data.current.condition.text}`;
 
+            const currentWeatherIconUrl = `https:${data.current.condition.icon.replace("64x64", "128x128")}`;
+
+            currentWeatherImage.src = currentWeatherIconUrl;
+
             humidityContainer.innerHTML = `${data.current.humidity}%`;
             windContainer.innerHTML = `Kierunek: ${data.current.wind_dir}<br>Prędkość: ${data.current.wind_kph} km/h`;
             pressureContainer.innerHTML = `${data.current.pressure_mb} hPa`;
@@ -332,7 +348,7 @@
                         return "Nów"
                         break;
                     case "Waxing Crescent":
-                        return "Sierp przybywający"
+                        return "Przybywający sierp"
                         break;
                     case "First Quarter":
                         return "Pierwsza kwadra"
