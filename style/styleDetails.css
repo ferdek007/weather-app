@@ -52,22 +52,37 @@ body{
     font-size: 1.4rem;
     color: rgb(57, 57, 58);
 }
+.cardsText{
+    font-size: 1.4rem;
+    color: rgb(57, 57, 58);
+    position:static;
+}
 .card-1{
     background: linear-gradient(to right, #ffffff 50%, rgba(241, 224, 190, 0.507));
+}
+@media(max-width:1000px){
+    .importnatText{
+        font-size: 2rem;
+    }
+    .normalText{
+        font-size: 1.3rem;
+    }
+    .cardsText{
+        font-size: 1rem;
+        color: rgb(57, 57, 58);
+    }
 }
 @media(max-width:767px)
 {
     .importnatText{
-        font-size: 3rem;
+        font-size: 1.5rem;
     }
-}
-.location{
-    margin-bottom: 1.5rem;
-}
-@media(max-width:767px)
-{
-    .location{
-        font-size: 0.75rem;
+    .normalText{
+        font-size: 1rem;
+    }
+    .cardsText{
+        font-size: 1.5rem;
+        color: rgb(57, 57, 58);
     }
 }
 .img-fluid{

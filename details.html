@@ -192,40 +192,40 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_1">
-                    <div class="normalText">Wilgotność</div>
-                    <div class="normalText" id="humidity">X %</div>
+                    <div class="cardsText">Wilgotność</div>
+                    <div class="cardsText" id="humidity">X %</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_2">
-                    <div class="normalText">Wiatr</div>
-                    <div class="normalText" id="wind">Kierunek Moc</div>
+                    <div class="cardsText">Wiatr</div>
+                    <div class="cardsText" id="wind">Kierunek Moc</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_3">
-                    <div class="normalText">Ciśnienie</div>
-                    <div class="normalText" id="pressure">x hPa</div>
+                    <div class="cardsText">Ciśnienie</div>
+                    <div class="cardsText" id="pressure">x hPa</div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_4">
-                    <div class="normalText">Wschód/Zachód</div>
-                    <div class="normalText" id="sun">godzina/godzina</div>
+                    <div class="cardsText">Wschód/Zachód</div>
+                    <div class="cardsText" id="sun">godzina/godzina</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_5">
-                    <div class="normalText">Faza książyca</div>
-                    <div class="normalText" id="moon">Nazwa</div>
+                    <div class="cardsText">Faza książyca</div>
+                    <div class="cardsText" id="moon">Nazwa</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" id="extraData_6">
-                    <div class="normalText">Indeks UV</div>
-                    <div class="normalText" id="uv-index">Niski/Średni/Wysoki</div>
+                    <div class="cardsText">Indeks UV</div>
+                    <div class="cardsText" id="uv-index">Niski/Średni/Wysoki</div>
                 </div>
             </div>
         </div>
@@ -373,23 +373,23 @@
                 }
             };
 
-            moonContainer.innerHTML = `${getPolishMoonPhaseText(data.forecast.forecastday[0].astro.moon_phase)}<br><br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
+            moonContainer.innerHTML = `${getPolishMoonPhaseText(data.forecast.forecastday[0].astro.moon_phase)}`;
 
             const uvIndexRangeText = (uvIndexNumber) => {
                 if (uvIndexNumber <= 2) {
-                    uvindexContainer.style.backgroundColor = "#32CD32";
+                    extraData_6.style.backgroundColor = "#B7F598";
                     return "Niski";
                 } else if (uvIndexNumber >= 3 && uvIndexNumber <= 5) {
-                    uvindexContainer.style.backgroundColor = "#FFFF33";
+                    extraData_6.style.backgroundColor = "#F0F699";
                     return "Umiarkowany";
                 } else if (uvIndexNumber >= 6 && uvIndexNumber <= 7) {
-                    uvindexContainer.style.backgroundColor = "#FF8C00";
+                    extraData_6.style.backgroundColor = "#FAC37A";
                     return "Wysoki";
                 } else if (uvIndexNumber >= 8 && uvIndexNumber <= 10) {
-                    uvindexContainer.style.backgroundColor = "#FF4500";
+                    extraData_6.style.backgroundColor = "#F5A338";
                     return "Bardzo wysoki";
                 } else {
-                    uvindexContainer.style.backgroundColor = "#BA55D3";
+                    extraData_6.style.backgroundColor = "#C37AFA";
                     return "Ekstremalny";
                 }
             };
