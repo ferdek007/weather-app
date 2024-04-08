@@ -41,7 +41,7 @@
         </div>
         <div class="row">
             <div class="card card-2 flex-shrink-1">
-                <div class="row">
+                <div class="row flex-nowrap overflow-x-scroll">
                     <div class="col">
                         <div id="hourCard" class="row row3">0</div>
                         <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
@@ -377,14 +377,19 @@
 
             const uvIndexRangeText = (uvIndexNumber) => {
                 if (uvIndexNumber <= 2) {
+                    uvindexContainer.style.backgroundColor = "#32CD32";
                     return "Niski";
                 } else if (uvIndexNumber >= 3 && uvIndexNumber <= 5) {
+                    uvindexContainer.style.backgroundColor = "#FFFF33";
                     return "Umiarkowany";
                 } else if (uvIndexNumber >= 6 && uvIndexNumber <= 7) {
+                    uvindexContainer.style.backgroundColor = "#FF8C00";
                     return "Wysoki";
                 } else if (uvIndexNumber >= 8 && uvIndexNumber <= 10) {
+                    uvindexContainer.style.backgroundColor = "#FF4500";
                     return "Bardzo wysoki";
                 } else {
+                    uvindexContainer.style.backgroundColor = "#BA55D3";
                     return "Ekstremalny";
                 }
             };
