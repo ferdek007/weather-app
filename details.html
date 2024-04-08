@@ -325,8 +325,56 @@
             pressureContainer.innerHTML = `${data.current.pressure_mb} hPa`;
 
             sunContainer.innerHTML = `${data.forecast.forecastday[0].astro.sunrise}<br>${data.forecast.forecastday[0].astro.sunset}`;
-            moonContainer.innerHTML = `${data.forecast.forecastday[0].astro.moon_phase}<br><br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
-            uvindexContainer.innerHTML = `${data.current.uv}`;
+
+            const getPolishMoonPhaseText = (moonPhaseEnglishText) => {
+                switch (moonPhaseEnglishText) {
+                    case "New Moon":
+                        return "Nów"
+                        break;
+                    case "Waxing Crescent":
+                        return "Sierp przybywający"
+                        break;
+                    case "First Quarter":
+                        return "Pierwsza kwadra"
+                        break;
+                    case "Waxing Gibbous":
+                        return "Rosnący garb"
+                        break;
+                    case "Full Moon":
+                        return "Pełnia"
+                        break;
+                    case "Waning Gibbous":
+                        return "Znikający garb"
+                        break;
+                    case "Last Quarter":
+                        return "Trzecia kwadra"
+                        break;
+                    case "Waning Crescent":
+                        return "Znikający sierp"
+                        break;
+                    default:
+                        return moonPhaseEnglishText;
+                }
+            };
+
+            moonContainer.innerHTML = `${getPolishMoonPhaseText(data.forecast.forecastday[0].astro.moon_phase)}<br><br>${data.forecast.forecastday[0].astro.moonrise}<br>${data.forecast.forecastday[0].astro.moonset}`;
+
+            const uvIndexRangeText = (uvIndexNumber) => {
+                if (uvIndexNumber <= 2) {
+                    return "Niski";
+                } else if (uvIndexNumber >= 3 && uvIndexNumber <= 5) {
+                    return "Umiarkowany";
+                } else if (uvIndexNumber >= 6 && uvIndexNumber <= 7) {
+                    return "Wysoki";
+                } else if (uvIndexNumber >= 8 && uvIndexNumber <= 10) {
+                    return "Bardzo wysoki";
+                } else {
+                    return "Ekstremalny";
+                }
+            };
+
+            uvindexContainer.innerHTML = `${data.current.uv}<br>${uvIndexRangeText(data.current.uv)}`;
+
             resizeCards();
         };
 
