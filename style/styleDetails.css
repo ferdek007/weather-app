@@ -25,6 +25,7 @@ body{
 .day-forecast-wrapper{
     margin-left: 15px;
     margin-right: 15px;
+    cursor: pointer;
 }
 @media(max-width:1400px){
     .card-2 .row{
@@ -34,7 +35,6 @@ body{
 
 @media(max-width:767px){
     .card{
-        /* height: 10rem; */
         padding: 1.5rem 1.5rem 1rem 1.5rem;
     }
 }

@@ -5,223 +5,375 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pogoda</title>
+    <link rel="icon" href="./imgs/day.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style/style.css">
+
+    <link rel="stylesheet" href="style/styleDetails.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="card card-1">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="temp">23&deg;</div>
-                                <div class="location">Coimbra, Portugal</div>
-                            </div>
-                            <div class="col-6 justify-content-right">
-                                <img class="img-fluid" src="img/icons8-sun-144.png">
-                            </div>
-                        </div>
-
+    <div class="container mt-3">
+        <div class="row">
+            <div class="card card-2 flex-shrink-1">
+                <div class="row">
+                    <div class="col-6 justify-content-left">
+                        <div class="importnatText" id="location">Miasto, Kraj</div>
+                        <div class="normalText" id="temp">Stopnie &deg; C</div>
+                        <div class="normalText" id="max-min">Max &deg; C / Min &deg; C</div>
+                        <div class="normalText" id="date">dzień</div>
                     </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="card card-2">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-
-                <!-- The slideshow -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="row">
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/ios/100/000000/sun.png" /></div>
-                                <div class="row row3">0</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/ios/100/000000/sun.png" /></div>
-                                <div class="row row3">1</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/windows/100/000000/cloud.png" /></div>
-                                <div class="row row3">2</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/windows/100/000000/cloud.png" /></div>
-                                <div class="row row3">3</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">4</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">5</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">6</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">7</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">8</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">9</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">10</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">11</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">12</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">13</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">14</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">15</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">16</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">17</div>
-                                <div class="row row4">PM</div>
-                            </div>
-
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">18</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">19</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">20</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">21</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">22</div>
-                                <div class="row row4">PM</div>
-                            </div>
-                            <div class="col">
-                                <div class="row row1">0&deg;</div>
-                                <div class="row row2"><img class="img-fluid"
-                                        src="https://img.icons8.com/cotton/64/000000/rain--v3.png" /></div>
-                                <div class="row row3">23</div>
-                                <div class="row row4">PM</div>
-                            </div>
+                    <div class="col-6 justify-content-right">
+                        <div>
+                            <img id="current-weather-image" src="imgs/day.png" alt="current-weather-image">
+                            <div class="txt-fluid" id="weather-text">opis pogody</div>
                         </div>
                     </div>
                 </div>
-
             </div>
+        </div>
+        <div class="row scale-column">
+            <div class="card card-2 flex-shrink-1">
+                <div class="row flex-nowrap overflow-x-scroll">
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">0</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">1</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">2</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">3</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">4</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">5</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">6</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">7</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">8</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">9</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">10</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">11</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">12</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">13</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">14</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">15</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">16</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">17</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">18</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">19</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">20</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">21</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">22</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                    <div class="col temp-wrapper">
+                        <div id="hourCard" class="row row3">23</div>
+                        <div id="hourCard" class="row row1 temp-hour">0&deg;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_1">
+                    <div class="cardsText">Wilgotność</div>
+                    <div class="cardsText" id="humidity">X %</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_2">
+                    <div class="cardsText">Wiatr</div>
+                    <div class="cardsText" id="wind">Kierunek Moc</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_3">
+                    <div class="cardsText">Szansa opadów</div>
+                    <div class="cardsText" id="pressure">x hPa</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_4">
+                    <div class="cardsText">Wschód/Zachód</div>
+                    <div class="cardsText" id="sun">godzina/godzina</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_5">
+                    <div class="cardsText">Faza książyca</div>
+                    <div class="cardsText" id="moon">Nazwa</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_6">
+                    <div class="cardsText">Indeks UV</div>
+                    <div class="cardsText" id="uv-index">Niski/Średni/Wysoki</div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="api.js"></script>
+
+    <script>
+        const DEFAULT_LOCATION = 'Berlin';
+
+        const resizeCards = () => {
+            const cards = [
+                document.getElementById("extraData_1"),
+                document.getElementById("extraData_2"),
+                document.getElementById("extraData_3"),
+                document.getElementById("extraData_4"),
+                document.getElementById("extraData_5"),
+                document.getElementById("extraData_6")
+            ]
+
+            let biggestHeight = 0;
+            cards.forEach(card => {
+                if (card.offsetHeight > biggestHeight) {
+                    biggestHeight = card.offsetHeight;
+                }
+            });
+
+            // console.log(biggestHeight);
+
+            cards.forEach(card => {
+                card.style.height = biggestHeight + "px";
+            });
+        };
+
+        const getWeekdayIndexFromTimestamp = (timestamp) => {
+            // Create a new Date object from the timestamp (convert milliseconds to seconds)
+            const date = new Date(timestamp * 1000);
+
+            // Get the weekday index (0 for Monday, 1 for Tuesday, ..., 6 for Sunday)
+            var weekdayIndex = (date.getDay() + 6) % 7;
+
+            return weekdayIndex;
+        };
+
+        const getWeekdayFromTimestamp = (timestamp) => {
+            // Create a new Date object from the timestamp (convert milliseconds to seconds)
+            const date = new Date(timestamp * 1000);
+
+            const weekdays = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
+
+            var weekdayIndex = getWeekdayIndexFromTimestamp(timestamp);
+
+            return weekdays[weekdayIndex];
+        };
+
+        const updateHTML = (data) => {
+            const selectedDate = localStorage.getItem('selectedDate');
+
+            const locationContainer = document.getElementById('location');
+            const dateContainer = document.getElementById('date');
+            const currentTempContainer = document.getElementById('temp');
+            const maxminContainer = document.getElementById('max-min');
+            const weathertextContainer = document.getElementById('weather-text');
+            const currentWeatherImage = document.getElementById('current-weather-image');
+
+            const humidityContainer = document.getElementById('humidity');
+            const windContainer = document.getElementById('wind');
+            const pressureContainer = document.getElementById('pressure');
+
+            const sunContainer = document.getElementById('sun');
+            const moonContainer = document.getElementById('moon');
+            const uvindexContainer = document.getElementById('uv-index');
+
+            const tempHourElements = document.getElementsByClassName('temp-hour');
+
+            data.forecast.forecastday.forEach(day => {
+                if (day.date == selectedDate) {
+                    // console.log(day.date);
+
+                    const forecastTimestamp = day.date_epoch;
+                    const weekday = getWeekdayFromTimestamp(forecastTimestamp);
+
+                    dateContainer.innerHTML = `${weekday}, ${day.date}`;
+
+                    for (let i = 0; i < tempHourElements.length; i++) {
+                        tempHourElements[i].innerHTML = `${day.hour[i].temp_c}&deg;`;
+                    }
+
+                    locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
+                    currentTempContainer.innerHTML = `Temperatura: ${day.day.avgtemp_c}&deg;C`;
+                    maxminContainer.innerHTML = `Maksymalna: ${day.day.maxtemp_c}&deg;C <br> Minimalna: ${day.day.mintemp_c}&deg;C`;
+                    weathertextContainer.innerHTML = `${day.day.condition.text}`;
+
+                    const currentWeatherIconUrl = `https:${day.day.condition.icon.replace("64x64", "128x128")}`;
+
+                    currentWeatherImage.src = currentWeatherIconUrl;
+
+                    humidityContainer.innerHTML = `${day.day.avghumidity}%`;
+                    windContainer.innerHTML = `Prędkość: ${day.day.maxwind_kph} km/h`;
+                    pressureContainer.innerHTML = `${day.day.daily_chance_of_rain}%`;
+
+                    const convertTo24hour = (time12h) => {
+                        let time = time12h.split(" ");
+                        let hourMinute = time[0].split(':');
+                        let hour = parseInt(hourMinute[0]);
+                        let minute = parseInt(hourMinute[1]);
+                        let period = time[1].toUpperCase();
+
+                        if (period === "PM" && hour !== 12) {
+                            hour += 12;
+                        } else if (period === "AM" && hour === 12) {
+                            hour = 0;
+                        }
+                        return hour.toString().padStart(2, "0") + ":" + minute.toString().padStart(2, "0");
+                    };
+
+                    sunContainer.innerHTML = `${convertTo24hour(day.astro.sunrise)}<br>${convertTo24hour(day.astro.sunset)}`;
+
+                    const getPolishMoonPhaseText = (moonPhaseEnglishText) => {
+                        switch (moonPhaseEnglishText) {
+                            case "New Moon":
+                                return "Nów"
+                                break;
+                            case "Waxing Crescent":
+                                return "Przybywający sierp"
+                                break;
+                            case "First Quarter":
+                                return "Pierwsza kwadra"
+                                break;
+                            case "Waxing Gibbous":
+                                return "Rosnący garb"
+                                break;
+                            case "Full Moon":
+                                return "Pełnia"
+                                break;
+                            case "Waning Gibbous":
+                                return "Znikający garb"
+                                break;
+                            case "Last Quarter":
+                                return "Trzecia kwadra"
+                                break;
+                            case "Waning Crescent":
+                                return "Znikający sierp"
+                                break;
+                            default:
+                                return moonPhaseEnglishText;
+                        }
+                    };
+
+                    moonContainer.innerHTML = `${getPolishMoonPhaseText(day.astro.moon_phase)}`;
+
+                    const uvIndexRangeText = (uvIndexNumber) => {
+                        if (uvIndexNumber <= 2) {
+                            extraData_6.style.backgroundColor = "#B7F598";
+                            return "Niski";
+                        } else if (uvIndexNumber >= 3 && uvIndexNumber <= 5) {
+                            extraData_6.style.backgroundColor = "#F0F699";
+                            return "Umiarkowany";
+                        } else if (uvIndexNumber >= 6 && uvIndexNumber <= 7) {
+                            extraData_6.style.backgroundColor = "#FAC37A";
+                            return "Wysoki";
+                        } else if (uvIndexNumber >= 8 && uvIndexNumber <= 10) {
+                            extraData_6.style.backgroundColor = "#F5A338";
+                            return "Bardzo wysoki";
+                        } else {
+                            extraData_6.style.backgroundColor = "#C37AFA";
+                            return "Ekstremalny";
+                        }
+                    };
+
+                    uvindexContainer.innerHTML = `${day.day.uv}<br>${uvIndexRangeText(day.day.uv)}`;
+
+                    resizeCards();
+                };
+            });
+        };
+
+        if (localStorage.getItem('location')) {
+
+            const location = localStorage.getItem('location');
+
+            fetchForecastData(location).then((data) => {
+                console.log(data);
+                if (localStorage.getItem('selectedDate')) {
+                    updateHTML(data);
+                }
+                else {
+                    alert("Error! No day was selected!");
+                }
+
+            });
+
+        } else {
+            alert("Error! Location was not set!");
+        }
+
+        window.addEventListener('resize', resizeCards, true);
+    </script>
 </body>
 
 </html>

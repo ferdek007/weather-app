@@ -143,42 +143,42 @@
         <div class="row scale-column">
             <div class="card card-2 flex-shrink-1">
                 <div class="row flex-nowrap overflow-x-scroll">
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/day.png" />
                         </div>
                         <div class="row row3 day-forecast">Mon</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/clouds.png" />
                         </div>
                         <div class="row row3 day-forecast">Tue</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/fog_day.png" />
                         </div>
                         <div class="row row3 day-forecast">Wed</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/snow.png" /></div>
                         <div class="row row3 day-forecast">Thu</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/rain_snow.png" />
                         </div>
                         <div class="row row3 day-forecast">Fri</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image" src="imgs/wet_storm.png" />
                         </div>
                         <div class="row row3 day-forecast">Sat</div>
                     </div>
-                    <div class="col text-center day-forecast-wrapper">
+                    <div class="col text-center day-forecast-wrapper" onClick="navigateToSelectedDay(event)">
                         <div id="hourCard" class="row row1 day-forecast-temp">0&deg;</div>
                         <div class="row row2"><img class="img-fluid forecast-weather-image"
                                 src="imgs/partly_cloudy_day.png" />
@@ -253,7 +253,7 @@
                 }
             });
 
-            console.log(biggestHeight);
+            // console.log(biggestHeight);
 
             cards.forEach(card => {
                 card.style.height = biggestHeight + "px";
@@ -318,7 +318,6 @@
                     const forecastWeatherIconUrl = `https:${data.forecast.forecastday[i].day.condition.icon.replace("64x64", "128x128")}`;
                     forecastImageElements[i].src = forecastWeatherIconUrl;
 
-                    const weekdayIndex = getWeekdayIndexFromTimestamp(forecastTimestamp);
                     dayForecastTempElements[i].innerHTML = `${data.forecast.forecastday[i].day.avgtemp_c}&deg;C`;
                 } else {
                     break;
@@ -339,7 +338,22 @@
             windContainer.innerHTML = `Kierunek: ${data.current.wind_dir}<br>Prędkość: ${data.current.wind_kph} km/h`;
             pressureContainer.innerHTML = `${data.current.pressure_mb} hPa`;
 
-            sunContainer.innerHTML = `${data.forecast.forecastday[0].astro.sunrise}<br>${data.forecast.forecastday[0].astro.sunset}`;
+            const convertTo24hour = (time12h) => {
+                let time = time12h.split(" ");
+                let hourMinute = time[0].split(':');
+                let hour = parseInt(hourMinute[0]);
+                let minute = parseInt(hourMinute[1]);
+                let period = time[1].toUpperCase();
+
+                if (period === "PM" && hour !== 12) {
+                    hour += 12;
+                } else if (period === "AM" && hour === 12) {
+                    hour = 0;
+                }
+                return hour.toString().padStart(2, "0") + ":" + minute.toString().padStart(2, "0");
+            };
+
+            sunContainer.innerHTML = `${convertTo24hour(data.forecast.forecastday[0].astro.sunrise)}<br>${convertTo24hour(data.forecast.forecastday[0].astro.sunset)}`;
 
             const getPolishMoonPhaseText = (moonPhaseEnglishText) => {
                 switch (moonPhaseEnglishText) {
@@ -409,6 +423,21 @@
 
         } else {
             alert("Error! Location was not set!");
+        }
+
+        const navigateToSelectedDay = (event) => {
+            const parentDiv = event.currentTarget;
+            // console.log(parentDiv);
+
+            const childDiv = parentDiv.querySelectorAll('.day-forecast');
+            // console.log(childDiv);
+
+            const selectedDate = childDiv[0].innerText.slice(-10);
+            // console.log(selectedDate);
+
+
+            localStorage.setItem('selectedDate', selectedDate);
+            window.location.href = "selectedDay.html";
         }
 
         window.addEventListener('resize', resizeCards, true);
