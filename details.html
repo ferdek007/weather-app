@@ -26,7 +26,8 @@
                         <div class="normalText" id="temp">Stopnie &deg; C</div>
                         <div class="normalText" id="max-min">Max &deg; C / Min &deg; C</div>
                         <div class="normalText" id="feels-like">Odczuwalna X &deg; C</div>
-                        <div class="normalText" id="clock">dzień, godzina z minutami</div>
+                        <div class="normalText" id="clock">godzina z minutami</div>
+                        <div class="normalText" id="date">dzień</div>
                     </div>
                     <div class="col-6 justify-content-right">
                         <div>
@@ -230,7 +231,7 @@
     <script>
         const DEFAULT_LOCATION = 'Berlin';
 
-        const resizeCards = () =>{
+        const resizeCards = () => {
             const cards = [
                 document.getElementById("extraData_1"),
                 document.getElementById("extraData_2"),
@@ -341,7 +342,7 @@
         } else {
             alert("Error! Location was not set!");
         }
-        
+
         window.addEventListener('resize', resizeCards, true);
     </script>
 </body>

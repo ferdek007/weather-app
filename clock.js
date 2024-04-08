@@ -4,22 +4,21 @@ const startClock = () => {
     let hr = today.getHours();
     let min = today.getMinutes();
     let sec = today.getSeconds();
-    ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
-    hr = (hr == 0) ? 12 : hr;
-    hr = (hr > 12) ? hr - 12 : hr;
+
     hr = formatTime(hr);
     min = formatTime(min);
     sec = formatTime(sec);
 
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'];
+    const days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
     const curWeekDay = days[today.getDay()];
     const curDay = today.getDate();
     const curMonth = months[today.getMonth()];
     const curYear = today.getFullYear();
-    const date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+    const date = `${curWeekDay}, ${curDay} ${curMonth} ${curYear}`;
 
-    document.getElementById("clock").innerHTML = `${date}, ${hr}:${min}:${sec} ${ap}`;
+    document.getElementById("clock").innerHTML = `${hr}:${min}:${sec}`;
+    document.getElementById("date").innerHTML = date;
 
     const time = setTimeout(() => { startClock() }, 500);
 };
