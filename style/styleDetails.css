@@ -22,6 +22,10 @@ body{
 .card-2 .row{
     justify-content: center;
 }
+.day-forecast-wrapper{
+    margin-left: 15px;
+    margin-right: 15px;
+}
 @media(max-width:1400px){
     .card-2 .row{
         justify-content: left;
@@ -72,6 +76,7 @@ body{
         color: rgb(57, 57, 58);
     }
 }
+
 @media(max-width:767px)
 {
     .importnatText{
@@ -85,9 +90,46 @@ body{
         color: rgb(57, 57, 58);
     }
 }
-.img-fluid{
+
+@media(max-width:580px)
+{
+    .scale-column .row{
+        display: block;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .scale-column .col{
+        margin-bottom: 15px;
+    }
+    .temp-wrapper{
+        border-radius: 1.5rem;
+        background-color: lightblue;
+    }
+    .img-fluid{
+        height: 140px;
+        width: 140px;
+    }
+    .day-forecast-wrapper{
+        margin: 0;
+    }
+}
+
+#current-weather-image{
     justify-content: center;
     width: 50%;
+    min-height: 140px;
+    min-width: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.img-fluid{
+    justify-content: center;
+    min-height: 100px;
+    min-width: 100px;
+    padding: 0px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -104,10 +146,6 @@ body{
 }
 #hourCard:last-of-type{
     margin-right: 0px;
-}
-.row2 .img-fluid{
-    margin: 10% 0;
-    width: 40%;
 }
 
 .card-3 .row{
