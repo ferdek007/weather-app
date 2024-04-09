@@ -1,45 +1,45 @@
 html,
-        body {
-            width: 100%;
-            height: 100%;
-        }
+body {
+    width: 100%;
+    height: 100%;
+}
 
-        body {
-            background-color: #f8f9fa;
-            margin: 0 auto;
-        }
+body {
+    background-color: #f8f9fa;
+    margin: 0 auto;
+}
 
-        .container {
-            margin-top: 50px;
-        }
+.container {
+    margin-top: 50px;
+}
 
-        .weather-card-input {
-            padding: 1.2rem 1.5rem 1rem 1.5rem;
-            background-color: #fff;
-            border-radius: 1.5rem;
-            border-color: rgba(238, 237, 237, 0.438);
-            box-shadow: 5px 8px 10px #80808033;
-            text-align: center;
-        }
+.weather-card-input {
+    padding: 1.2rem 1.5rem 1rem 1.5rem;
+    background-color: #fff;
+    border-radius: 1.5rem;
+    border-color: rgba(238, 237, 237, 0.438);
+    box-shadow: 5px 8px 10px #80808033;
+    text-align: center;
+}
 
-        .weather-card-map {
-            padding: 1.2rem 1.5rem 1rem 1.5rem;
-            background-color: #fff;
-            border-radius: 1.5rem;
-            border-color: rgba(238, 237, 237, 0.438);
-            box-shadow: 5px 8px 10px #80808033;
-            display: flex;
-            justify-content: center;
-            height: 350px;
-        }
+.weather-card-map {
+    padding: 1.2rem 1.5rem 1rem 1.5rem;
+    background-color: #fff;
+    border-radius: 1.5rem;
+    border-color: rgba(238, 237, 237, 0.438);
+    box-shadow: 5px 8px 10px #80808033;
+    display: flex;
+    justify-content: center;
+    height: 350px;
+}
 
-        h1,
-        h3 {
-            color: #007bff;
-        }
+h1,
+h3 {
+    color: #007bff;
+}
 
-        #map {
-            height: 100%;
-            width: 100%;
-            position: relative;
-        }
+#map {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
