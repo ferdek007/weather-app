@@ -30,6 +30,18 @@ body {
     cursor: pointer;
 }
 
+#weather-text {
+    font-size: 1.6rem;
+    color: rgb(57, 57, 58);
+    margin-top: 0.6rem;
+    text-align: center;
+}
+
+.day-forecast-temp{
+    margin-top: 20px;
+    justify-content: center;
+}
+
 @media(max-width:1400px) {
     .card-2 .row {
         justify-content: left;
@@ -90,10 +102,6 @@ body {
 }
 
 @media(max-width:767px) {
-    .importnatText {
-        font-size: 1.5rem;
-    }
-
     .normalText {
         font-size: 1rem;
     }
@@ -105,6 +113,12 @@ body {
 }
 
 @media(max-width:580px) {
+    .col-6{
+        width: 100%;
+    }
+    #weather-text{
+        font-size: 1.2rem;
+    }
     .scale-column .row {
         display: block;
         align-items: center;
@@ -151,13 +165,6 @@ body {
     display: block;
 }
 
-.txt-fluid {
-    font-size: 1.4rem;
-    color: rgb(57, 57, 58);
-    margin-top: 0.6rem;
-    text-align: center;
-}
-
 #hourCard {
     font-size: 1rem;
     margin-right: 5px;
@@ -185,7 +192,6 @@ body {
 
 @media(max-width:400px) {
     .row3 {
-        font-size: 0.7rem;
         font-weight: bold;
         color: black;
     }

@@ -13,6 +13,8 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
+    <script src="https://kit.fontawesome.com/850f146030.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style/styleDetails.css">
 </head>
 
@@ -26,13 +28,14 @@
                         <div class="normalText" id="temp">Stopnie &deg; C</div>
                         <div class="normalText" id="max-min">Max &deg; C / Min &deg; C</div>
                         <div class="normalText" id="feels-like">Odczuwalna X &deg; C</div>
+                        <br>
                         <div class="normalText" id="clock">godzina z minutami</div>
                         <div class="normalText" id="date">dzień</div>
                     </div>
                     <div class="col-6 justify-content-right">
                         <div>
                             <img id="current-weather-image" src="imgs/day.png" alt="current-weather-image">
-                            <div class="txt-fluid" id="weather-text">opis pogody</div>
+                            <div id="weather-text">opis pogody</div>
                         </div>
                     </div>
                 </div>
@@ -219,19 +222,19 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_1">
-                    <div class="cardsText">Wilgotność</div>
+                    <div class="cardsText"><i class="fa-solid fa-droplet"></i>&nbsp; Wilgotność</i></div>
                     <div class="cardsText" id="humidity">X %</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_2">
-                    <div class="cardsText">Wiatr</div>
+                    <div class="cardsText"><i class="fa-solid fa-wind"></i>&nbsp; Wiatr</div>
                     <div class="cardsText" id="wind">Kierunek Moc</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #DEF5FD;" id="extraData_3">
-                    <div class="cardsText">Ciśnienie</div>
+                    <div class="cardsText"><i class="fa-solid fa-gauge"></i>&nbsp; Ciśnienie</div>
                     <div class="cardsText" id="pressure">x hPa</div>
                 </div>
             </div>
@@ -239,19 +242,19 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_4">
-                    <div class="cardsText">Wschód/Zachód</div>
+                    <div class="cardsText"><i class="fa-solid fa-sun"></i>&nbsp; Wschód/Zachód</div>
                     <div class="cardsText" id="sun">godzina/godzina</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_5">
-                    <div class="cardsText">Faza książyca</div>
+                    <div class="cardsText"><i class="fa-solid fa-moon"></i>&nbsp; Faza księżyca</div>
                     <div class="cardsText" id="moon">Nazwa</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_6">
-                    <div class="cardsText">Indeks UV</div>
+                    <div class="cardsText"><i class="fa-solid fa-sun-plant-wilt"></i>&nbsp; Indeks UV</div>
                     <div class="cardsText" id="uv-index">Niski/Średni/Wysoki</div>
                 </div>
             </div>
@@ -353,9 +356,9 @@
             }
 
             locationContainer.innerHTML = `${data.location.name}, ${data.location.country}`;
-            currentTempContainer.innerHTML = `Temperatura: ${data.current.temp_c}&deg;C`;
-            maxminContainer.innerHTML = `Maksymalna: ${data.forecast.forecastday[0].day.maxtemp_c}&deg;C <br> Minimalna: ${data.forecast.forecastday[0].day.mintemp_c}&deg;C`;
-            feelslikeContainer.innerHTML = `Odczuwalna: ${data.current.feelslike_c}&deg;C`;
+            currentTempContainer.innerHTML = `Temperatura: ${data.current.temp_c}&deg;C &nbsp;<i class="fa-solid fa-temperature-low"></i>`;
+            maxminContainer.innerHTML = `Maksymalna: ${data.forecast.forecastday[0].day.maxtemp_c}&deg;C &nbsp;<i class="fa-solid fa-temperature-arrow-up"></i> <br> Minimalna: ${data.forecast.forecastday[0].day.mintemp_c}&deg;C &nbsp;<i class="fa-solid fa-temperature-arrow-down"></i>`;
+            feelslikeContainer.innerHTML = `Odczuwalna: ${data.current.feelslike_c}&deg;C &nbsp;<i class="fa-solid fa-person-rays"></i>`;
             weathertextContainer.innerHTML = `${data.current.condition.text}`;
 
             const currentWeatherIconUrl = `https:${data.current.condition.icon.replace("64x64", "128x128")}`;

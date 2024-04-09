@@ -15,9 +15,9 @@ const startClock = () => {
     const curDay = today.getDate();
     const curMonth = months[today.getMonth()];
     const curYear = today.getFullYear();
-    const date = `${curWeekDay}, ${curDay} ${curMonth} ${curYear}`;
+    const date = `<i class="fa-regular fa-calendar-days"></i> &nbsp;${curWeekDay}, ${curDay} ${curMonth} ${curYear}`;
 
-    document.getElementById("clock").innerHTML = `${hr}:${min}:${sec}`;
+    document.getElementById("clock").innerHTML = `<i class="fa-solid fa-clock"></i> ${hr}:${min}:${sec}`;
     document.getElementById("date").innerHTML = date;
 
     const time = setTimeout(() => { startClock() }, 500);
