@@ -42,6 +42,12 @@ body {
     justify-content: center;
 }
 
+#moon-phase-image{
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 5px 0;
+}
+
 @media(max-width:1400px) {
     .card-2 .row {
         justify-content: left;

@@ -195,6 +195,9 @@
             <div class="col-md-4">
                 <div class="card card-2 text-center" style="background-color: #E6E6E6;" id="extraData_5">
                     <div class="cardsText"><i class="fa-solid fa-moon"></i>&nbsp; Faza księżyca</div>
+                    <div class="cardsText">
+                        <img id="moon-phase-image" src="./imgs/moon-phases-icons/full-moon.png" alt="moon-phase-image">
+                    </div>
                     <div class="cardsText" id="moon">Nazwa</div>
                 </div>
             </div>
@@ -273,6 +276,7 @@
 
             const sunContainer = document.getElementById('sun');
             const moonContainer = document.getElementById('moon');
+            const moonPhaseImage = document.getElementById('moon-phase-image');
             const uvindexContainer = document.getElementById('uv-index');
 
             const tempHourElements = document.getElementsByClassName('temp-hour');
@@ -323,28 +327,28 @@
                     const getPolishMoonPhaseText = (moonPhaseEnglishText) => {
                         switch (moonPhaseEnglishText) {
                             case "New Moon":
-                                return "Nów"
+                                return "Nów";
                                 break;
                             case "Waxing Crescent":
-                                return "Przybywający sierp"
+                                return "Przybywający sierp";
                                 break;
                             case "First Quarter":
-                                return "Pierwsza kwadra"
+                                return "Pierwsza kwadra";
                                 break;
                             case "Waxing Gibbous":
-                                return "Rosnący garb"
+                                return "Rosnący garb";
                                 break;
                             case "Full Moon":
-                                return "Pełnia"
+                                return "Pełnia";
                                 break;
                             case "Waning Gibbous":
-                                return "Znikający garb"
+                                return "Znikający garb";
                                 break;
                             case "Last Quarter":
-                                return "Trzecia kwadra"
+                                return "Trzecia kwadra";
                                 break;
                             case "Waning Crescent":
-                                return "Znikający sierp"
+                                return "Znikający sierp";
                                 break;
                             default:
                                 return moonPhaseEnglishText;
@@ -352,6 +356,39 @@
                     };
 
                     moonContainer.innerHTML = `${getPolishMoonPhaseText(day.astro.moon_phase)}`;
+
+                    const getMoonPhaseImageAddress = (moonPhaseEnglishText) => {
+                        switch (moonPhaseEnglishText) {
+                            case "New Moon":
+                                return "./imgs/moon-phases-icons/new-moon.png";
+                                break;
+                            case "Waxing Crescent":
+                                return "./imgs/moon-phases-icons/waxing-crescent-moon.png";
+                                break;
+                            case "First Quarter":
+                                return "./imgs/moon-phases-icons/first-quarter-moon.png";
+                                break;
+                            case "Waxing Gibbous":
+                                return "./imgs/moon-phases-icons/waxing-gibbous-moon.png";
+                                break;
+                            case "Full Moon":
+                                return "./imgs/moon-phases-icons/full-moon.png";
+                                break;
+                            case "Waning Gibbous":
+                                return "./imgs/moon-phases-icons/waning-gibbous-moon.png";
+                                break;
+                            case "Last Quarter":
+                                return "./imgs/moon-phases-icons/last-quarter-moon.png";
+                                break;
+                            case "Waning Crescent":
+                                return "./imgs/moon-phases-icons/waning-crescent-moon.png";
+                                break;
+                            default:
+                                return "./imgs/moon-phases-icons/full-moon.png";
+                        }
+                    };
+
+                    moonPhaseImage.src = `${getMoonPhaseImageAddress(day.astro.moon_phase)}`;
 
                     const uvIndexRangeText = (uvIndexNumber) => {
                         if (uvIndexNumber <= 2) {
