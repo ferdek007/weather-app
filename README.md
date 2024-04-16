@@ -1,1 +1,2 @@
-Silmpe weather app created for school project. This is first interaction with bootstrap.
+Simple weather app created as a school project.
+The project requirement was to use Bootstrap in any way.
